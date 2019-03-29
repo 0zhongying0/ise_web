@@ -1,0 +1,10 @@
+keras
+numpy
+urllib3
+matplotlib
+seaborn
+scikit-learn
+opencv-python
+gensim
+pillow
+regex
