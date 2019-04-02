@@ -45,7 +45,16 @@ def _get_dataset(scale):
     """
     col_names = _col_names()
     #df = pd.read_csv("data/kddcup.data_10_percent_corrected", header=None, names=col_names)
-    df = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv")
+    df1 = pd.read_csv("data/MachineLearningCVE/Monday-WorkingHours.pcap_ISCX.csv")
+    df2 = pd.read_csv("data/MachineLearningCVE/Tuesday-WorkingHours.pcap_ISCX.csv")
+    df3 = pd.read_csv("data/MachineLearningCVE/Wednesday-workingHours.pcap_ISCX.csv")
+    df4 = pd.read_csv("data/MachineLearningCVE/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv")
+    df5 = pd.read_csv("data/MachineLearningCVE/Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv")
+    df6 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Morning.pcap_ISCX.csv")
+    df7 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv")
+    df8 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv")
+    df = pd.concat([df1, df2, df3, df4, df5, df6, df7, df8], axis=0)
+
     #text_l = ['protocol_type', 'service', 'flag', 'land', 'logged_in', 'is_host_login', 'is_guest_login']
     df.drop('Flow Bytes/s', axis=1, inplace=True)
     df.drop(' Flow Packets/s', axis=1, inplace=True)

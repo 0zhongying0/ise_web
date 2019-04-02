@@ -393,13 +393,13 @@ def test(dataset, nb_epochs, degree, random_seed, label,
 
         model = 'alad_sn{}_dzz{}'.format(do_spectral_norm, allow_zz)
         save_results(scores_ch, testy, model, dataset, 'ch',
-                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step))
+                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
         save_results(scores_l1, testy, model, dataset, 'l1',
-                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step))
+                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
         save_results(scores_l2, testy, model, dataset, 'l2',
-                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step))
+                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
         save_results(scores_fm, testy, model, dataset, 'fm',
-                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step))
+                     'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
 
 def run(args):
     """ Runs the training process"""

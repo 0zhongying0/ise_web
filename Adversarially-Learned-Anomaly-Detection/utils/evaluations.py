@@ -171,7 +171,7 @@ def save_grid_plot(samples, samples_rec, name_model, dataset, nb_images=50,
 
 
 def save_results(scores, true_labels, model, dataset, method, weight, label,
-                 random_seed, step=-1):
+                 random_seed, step=-1,train=True):
 
     directory = 'results/{}/{}/{}/w{}/'.format(model,
                                                   dataset,
@@ -198,10 +198,15 @@ def save_results(scores, true_labels, model, dataset, method, weight, label,
     do_hist(scores, true_labels, directory, dataset, random_seed)
     if np.max(true_labels)>1:
         do_hists(scores, true_labels, directory, dataset, random_seed)
-        
-    per = get_percentile(scores, dataset)    
+    
+    if train:
+        per = get_percentile(scores, dataset)
+    else:
+        pass  
     y_pred = (scores>=per)
     print('-----------------per-----------------' + str(per))
+    print('-----------------y_pred-----------------')
+    print(y_pred)
     
     precision, recall, f1, _ = precision_recall_fscore_support(true_labels.astype(int),
                                                                y_pred.astype(int),

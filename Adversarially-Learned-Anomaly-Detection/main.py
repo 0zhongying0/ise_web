@@ -63,7 +63,7 @@ if __name__ == "__main__":
     parser.add_argument('dataset', nargs="?", choices=['kdd','cifar10', 'svhn', 'arrhythmia', 'cicids2017'], help='the name of the dataset you want to run the experiments on')
 
     parser.add_argument('split', nargs="?", choices=['run','testing'])
-    parser.add_argument('--nb_epochs', nargs="?", type=int, default=0, help='number of epochs you want to train the dataset on')
+    parser.add_argument('--nb_epochs', nargs="?", type=int, default=1, help='number of epochs you want to train the dataset on')
     parser.add_argument('--gpu', nargs="?", type=int, default=0, help='which gpu to use')
     #anomaly
     parser.add_argument('--label', nargs="?", type=int, default=0, help='anomalous label for the experiment')
