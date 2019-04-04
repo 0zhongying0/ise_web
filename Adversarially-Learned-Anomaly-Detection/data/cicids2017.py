@@ -20,7 +20,7 @@ def get_valid(label=0, scale=False, *args):
 
 def get_shape_input():
     """Get shape of the dataset for cicids2017"""
-    return (None, 76)
+    return (None, 79)
 
 def get_shape_label():
     """Get shape of the labels in cicids2017"""
@@ -45,29 +45,20 @@ def _get_dataset(scale):
     """
     col_names = _col_names()
     #df = pd.read_csv("data/kddcup.data_10_percent_corrected", header=None, names=col_names)
-    df1 = pd.read_csv("data/MachineLearningCVE/Monday-WorkingHours.pcap_ISCX.csv")
-    df2 = pd.read_csv("data/MachineLearningCVE/Tuesday-WorkingHours.pcap_ISCX.csv")
-    df3 = pd.read_csv("data/MachineLearningCVE/Wednesday-workingHours.pcap_ISCX.csv")
-    df4 = pd.read_csv("data/MachineLearningCVE/Thursday-WorkingHours-Morning-WebAttacks.pcap_ISCX.csv")
-    df5 = pd.read_csv("data/MachineLearningCVE/Thursday-WorkingHours-Afternoon-Infilteration.pcap_ISCX.csv")
-    df6 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Morning.pcap_ISCX.csv")
-    df7 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Afternoon-PortScan.pcap_ISCX.csv")
-    df8 = pd.read_csv("data/MachineLearningCVE/Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv")
-    df = pd.concat([df1, df2, df3, df4, df5, df6, df7, df8], axis=0)
-
+    df = pd.read_csv("data/MachineLearningCVE/all.csv")
     #text_l = ['protocol_type', 'service', 'flag', 'land', 'logged_in', 'is_host_login', 'is_guest_login']
-    df.drop('Flow Bytes/s', axis=1, inplace=True)
-    df.drop(' Flow Packets/s', axis=1, inplace=True)
+    #df.drop('Flow Bytes/s', axis=1, inplace=True)
+    #df.drop(' Flow Packets/s', axis=1, inplace=True)
     text_l = []
 
     for name in text_l:
         _encode_text_dummy(df, name)
 
-    labels = df[' Label'].copy()
-    labels[labels != 'BENIGN'] = 0
-    labels[labels == 'BENIGN'] = 1
+    #labels = df[' Label'].copy()
+    #labels[labels != 'BENIGN'] = 0
+    #labels[labels == 'BENIGN'] = 1
 
-    df[' Label'] = labels
+    #df[' Label'] = labels
 
     df_train = df.sample(frac=0.5, random_state=42)
     df_test = df.loc[~df.index.isin(df_train.index)]

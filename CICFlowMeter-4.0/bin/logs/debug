@@ -2,3 +2,5 @@
 2019-03-25 17:01:55 INFO  cic.cs.unb.ca.ifm.Cmd    You select: in
 2019-03-25 17:01:55 INFO  cic.cs.unb.ca.ifm.Cmd    Out folder: out
 2019-03-25 17:01:55 DEBUG cic.cs.unb.ca.jnetpcap.PacketReader    Read All packets on in/mycap.pcap
+2019-04-05 04:38:38 INFO  cic.cs.unb.ca.ifm.Cmd    You select: ../../package_file/
+2019-04-05 04:38:38 INFO  cic.cs.unb.ca.ifm.Cmd    Out folder: out/
