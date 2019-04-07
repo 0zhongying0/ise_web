@@ -1,8 +1,28 @@
-2019-03-22 18:52:02 - Pcap is listening...
-2019-03-22 18:52:38 - Pcap stop listening
-2019-03-22 18:52:38 - path:/home/uscc/下載/CICFlowMeter-4.0/bin/data/daily/2019-03-22_Flow.csv
-2019-03-25 16:31:33 - Please select pcap!
-2019-03-25 17:01:55 - You select: in
-2019-03-25 17:01:55 - Out folder: out
-2019-04-05 04:38:38 - You select: ../../package_file/
-2019-04-05 04:38:38 - Out folder: out/
+2019-04-05 05:11:10 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-05 05:11:10 - Out folder: ./out
+2019-04-05 05:12:41 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-05 05:12:41 - Out folder: /home/keiko/project/ise_web/out/
+2019-04-05 05:13:29 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-05 05:13:29 - Out folder: /home/keiko/project/ise_web/out/
+2019-04-05 20:19:27 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-05 20:19:27 - Out folder: /home/keiko/project/ise_web/out/
+2019-04-07 10:56:44 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-07 10:56:44 - Out folder: /home/keiko/project/ise_web/package_file_temp_out/
+2019-04-07 10:56:44 - Error while opening file for capture: truncated dump file; tried to read 4 file header bytes, only got 0
+2019-04-07 10:57:25 - You select: /home/keiko/project/ise_web/package_file/
+2019-04-07 10:57:25 - Out folder: /home/keiko/project/ise_web/package_file_temp_out/
+2019-04-07 11:04:34 - The pcap file or folder does not exist! -> ./package_file
+2019-04-07 11:05:12 - You select: ../../package_file
+2019-04-07 11:05:12 - Out folder: ../../package_file_temp_out
+2019-04-07 12:00:56 - You select: ../../package_file
+2019-04-07 12:00:56 - Out folder: ../../package_file_temp_out
+2019-04-07 12:01:16 - You select: ../../package_file
+2019-04-07 12:01:16 - Out folder: ../../package_file_temp_out
+2019-04-07 12:01:43 - You select: ../../package_file
+2019-04-07 12:01:43 - Out folder: ../../package_file_temp_out
+2019-04-07 12:02:27 - You select: ../../package_file
+2019-04-07 12:02:27 - Out folder: ../../package_file_temp_out
+2019-04-07 12:03:04 - You select: ../../package_file
+2019-04-07 12:03:04 - Out folder: ../../package_file_temp_out
+2019-04-07 12:03:44 - You select: ../../package_file
+2019-04-07 12:03:44 - Out folder: ../../package_file_temp_out

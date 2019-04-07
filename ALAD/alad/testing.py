@@ -1,13 +1,14 @@
 import time
 import numpy as np
 import tensorflow as tf
+import pandas as pd
 #import tf_cnnvis
 import logging
 import importlib
 import sys
 import os
 from utils.adapt_data import batch_fill
-from utils.evaluations import save_results, heatmap
+from utils.evaluations_test import save_results, heatmap
 from utils.constants import IMAGES_DATASETS
 
 def get_getter(ema):  # to update neural net with moving avg variables, suitable for ss learning cf Saliman
@@ -17,18 +18,6 @@ def get_getter(ema):  # to update neural net with moving avg variables, suitable
         return ema_var if ema_var else var
     return ema_getter
 
-def display_parameters(batch_size, starting_lr, ema_decay, degree, label,
-                       allow_zz, score_method, do_spectral_norm):
-    """See parameters
-    """
-    print('Batch size: ', batch_size)
-    print('Starting learning rate: ', starting_lr)
-    print('EMA Decay: ', ema_decay)
-    print('Degree for L norms: ', degree)
-    print('Anomalous label: ', label)
-    print('Score method: ', score_method)
-    print('Discriminator zz enabled: ', allow_zz)
-    print('Spectral Norm enabled: ', do_spectral_norm)
 
 def display_progression_epoch(j, id_max):
     """See epoch progression
@@ -67,20 +56,24 @@ def test(dataset, nb_epochs, degree, random_seed, label,
 
     # Data
     logger.info('Data loading...')
-    trainx, trainy = data.get_train(label)
-    if enable_early_stop: validx, validy = data.get_valid(label)
-    trainx_copy = trainx.copy()
-    testx, testy = data.get_test(label)
+  
+    #testx, testy = data.get_test(label)
 
+    df = pd.DataFrame()
+    filenames = os.listdir("../package_file_temp_out/")
+    for x in filenames:
+        df_temp = pd.read_csv("../package_file_temp_out/" + x)
+        df.append(df_temp, ignore_index=True)
+
+    result = []
+    for x in df.columns:
+        if x != target:
+            result.append(x)
+    testx = df.as_matrix(result).astype(np.float32)
     rng = np.random.RandomState(random_seed)
-    nr_batches_train = int(trainx.shape[0] / batch_size)
     nr_batches_test = int(testx.shape[0] / batch_size)
 
     logger.info('Building graph...')
-
-    logger.warn("ALAD is training with the following parameters:")
-    display_parameters(batch_size, starting_lr, ema_decay, degree, label,
-                       allow_zz, score_method, do_spectral_norm)
 
     gen = network.decoder
     enc = network.encoder
@@ -410,3 +403,4 @@ def run(args):
         test(args.dataset, args.nb_epochs, args.d, args.rd, args.label,
                       args.enable_dzz, args.enable_sm, args.m,
                        args.enable_early_stop, args.sn)
+
