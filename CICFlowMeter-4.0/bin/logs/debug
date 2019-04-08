@@ -2574,3 +2574,7 @@
 2019-04-08 16:43:57 INFO  cic.cs.unb.ca.ifm.Cmd    Out folder: ../../package_file_temp_out
 2019-04-08 16:44:31 INFO  cic.cs.unb.ca.ifm.Cmd    You select: ../../package_file_temp
 2019-04-08 16:44:31 INFO  cic.cs.unb.ca.ifm.Cmd    Out folder: ../../package_file_temp_out
+2019-04-09 06:31:58 INFO  cic.cs.unb.ca.ifm.Cmd    You select: ../../package_file_temp
+2019-04-09 06:31:58 INFO  cic.cs.unb.ca.ifm.Cmd    Out folder: ../../package_file_temp_out
+2019-04-09 06:31:59 DEBUG cic.cs.unb.ca.jnetpcap.PacketReader    Read All packets on ../../package_file_temp/1554605595.298643.pcap
+2019-04-09 06:31:59 ERROR cic.cs.unb.ca.jnetpcap.PacketReader    Error while opening file for capture: truncated dump file; tried to read 4 file header bytes, only got 0

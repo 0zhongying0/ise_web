@@ -99,3 +99,6 @@
 2019-04-08 16:43:57 - Out folder: ../../package_file_temp_out
 2019-04-08 16:44:31 - You select: ../../package_file_temp
 2019-04-08 16:44:31 - Out folder: ../../package_file_temp_out
+2019-04-09 06:31:58 - You select: ../../package_file_temp
+2019-04-09 06:31:58 - Out folder: ../../package_file_temp_out
+2019-04-09 06:31:59 - Error while opening file for capture: truncated dump file; tried to read 4 file header bytes, only got 0

@@ -347,7 +347,7 @@ def test(dataset, nb_epochs, degree, random_seed, label,
             sum_op_im = tf.summary.merge_all('image')
             sum_op_valid = tf.summary.merge_all('v')
 
-    logdir = "train_logs/cicids2017/alad_snFalse_dzzFalse/dzzenabledFalse/fm/label0/rd42"
+    logdir = "train_logs/cicids2017/alad_snFalse_dzzFalse/dzzenabledFalse/fm/label0/rd43"
     saver = tf.train.Saver(max_to_keep=1)
     save_model_secs = None if enable_early_stop else 20
     sv = tf.train.Supervisor(logdir=logdir, save_summaries_secs=None, saver=saver, save_model_secs=save_model_secs) 

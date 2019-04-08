@@ -90,7 +90,7 @@ def decoder(z_inp, is_training=False, getter=None, reuse=False):
         name_net = 'layer_3'
         with tf.variable_scope(name_net):
             net = tf.layers.dense(net,
-                                  units=79,
+                                  units=78,
                                   kernel_initializer=init_kernel,
                                   name='fc')
 
