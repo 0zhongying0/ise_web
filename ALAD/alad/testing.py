@@ -8,7 +8,7 @@ import importlib
 import sys
 import os
 from utils.adapt_data import batch_fill
-from utils.evaluations_test import save_results, heatmap
+from utils.evaluations_test import save_results
 from utils.constants import IMAGES_DATASETS
 
 def get_getter(ema):  # to update neural net with moving avg variables, suitable for ss learning cf Saliman
@@ -59,16 +59,42 @@ def test(dataset, nb_epochs, degree, random_seed, label,
   
     #testx, testy = data.get_test(label)
 
-    df = pd.DataFrame()
-    filenames = os.listdir("../package_file_temp_out/")
-    for x in filenames:
-        df_temp = pd.read_csv("../package_file_temp_out/" + x)
-        df.append(df_temp, ignore_index=True)
+    df = pd.DataFrame(columns = ['Flow ID', 'Src IP', 'Src Port', 'Dst IP', 'Dst Port', 'Protocol', 'Timestamp', 'Flow Duration', 'Tot Fwd Pkts', 'Tot Bwd Pkts', 'TotLen Fwd Pkts', 'TotLen Bwd Pkts', 
+        'Fwd Pkt Len Max', 'Fwd Pkt Len Min', 'Fwd Pkt Len Mean', 'Fwd Pkt Len Std', 'Bwd Pkt Len Max', 'Bwd Pkt Len Min', 'Bwd Pkt Len Mean', 'Bwd Pkt Len Std', 'Flow Byts/s', 'Flow Pkts/s', 'Flow IAT Mean', 
+        'Flow IAT Std', 'Flow IAT Max', 'Flow IAT Min', 'Fwd IAT Tot', 'Fwd IAT Mean', 'Fwd IAT Std', 'Fwd IAT Max', 'Fwd IAT Min', 'Bwd IAT Tot', 'Bwd IAT Mean', 'Bwd IAT Std', 'Bwd IAT Max', 'Bwd IAT Min', 'Fwd PSH Flags', 
+        'Bwd PSH Flags', 'Fwd URG Flags', 'Bwd URG Flags', 'Fwd Header Len', 'Bwd Header Len', 'Fwd Pkts/s', 'Bwd Pkts/s', 'Pkt Len Min', 'Pkt Len Max', 'Pkt Len Mean', 'Pkt Len Std', 'Pkt Len Var', 'FIN Flag Cnt', 'SYN Flag Cnt', 
+        'RST Flag Cnt', 'PSH Flag Cnt', 'ACK Flag Cnt', 'URG Flag Cnt', 'CWE Flag Count', 'ECE Flag Cnt', 'Down/Up Ratio', 'Pkt Size Avg', 'Fwd Seg Size Avg', 'Bwd Seg Size Avg', 'Fwd Byts/b Avg', 'Fwd Pkts/b Avg', 
+        'Fwd Blk Rate Avg', 'Bwd Byts/b Avg', 'Bwd Pkts/b Avg', 'Bwd Blk Rate Avg', 'Subflow Fwd Pkts', 'Subflow Fwd Byts', 'Subflow Bwd Pkts', 'Subflow Bwd Byts', 'Init Fwd Win Byts', 'Init Bwd Win Byts', 
+        'Fwd Act Data Pkts', 'Fwd Seg Size Min', 'Active Mean', 'Active Std', 'Active Max', 'Active Min', 'Idle Mean', 'Idle Std', 'Idle Max', 'Idle Min', 'Label'])
 
+
+    filenames = os.listdir("../package_file_temp_out/")
+    os.chdir('../package_file_temp_out/')
+    for x in filenames:
+        df_temp = pd.read_csv(x)
+        l = [df]
+        l.append(df_temp)
+        df = pd.concat(l, axis=0, ignore_index=True)
+        #df.append(df_temp, ignore_index=True)
+
+    os.chdir('../')
     result = []
     for x in df.columns:
-        if x != target:
+        if x != 'Label':
             result.append(x)
+    
+    record = df.as_matrix(result)
+
+    df.drop('Flow ID', axis=1, inplace=True)
+    df.drop('Src IP', axis=1, inplace=True)
+    df.drop('Dst IP', axis=1, inplace=True)
+    df.drop('Timestamp', axis=1, inplace=True)
+    df.drop('Flow Byts/s', axis=1, inplace=True)
+    df.drop('Flow Pkts/s', axis=1, inplace=True)
+
+    element = ['Flow ID', 'Src IP', 'Dst IP', 'Timestamp', 'Flow Byts/s', 'Flow Pkts/s']
+    for x in element:
+        result.remove(x)
     testx = df.as_matrix(result).astype(np.float32)
     rng = np.random.RandomState(random_seed)
     nr_batches_test = int(testx.shape[0] / batch_size)
@@ -385,13 +411,13 @@ def test(dataset, nb_epochs, degree, random_seed, label,
             scores_fm += bscores_fm[:size]
 
         model = 'alad_sn{}_dzz{}'.format(do_spectral_norm, allow_zz)
-        save_results(scores_ch, testy, model, dataset, 'ch',
+        save_results(scores_ch, record, model, dataset, 'ch',
                      'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
-        save_results(scores_l1, testy, model, dataset, 'l1',
+        save_results(scores_l1, record, model, dataset, 'l1',
                      'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
-        save_results(scores_l2, testy, model, dataset, 'l2',
+        save_results(scores_l2, record, model, dataset, 'l2',
                      'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
-        save_results(scores_fm, testy, model, dataset, 'fm',
+        save_results(scores_fm, record, model, dataset, 'fm',
                      'dzzenabled{}'.format(allow_zz), label, random_seed, int(step), False)
 
 def run(args):

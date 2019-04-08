@@ -20,7 +20,7 @@ def main():
 	while True:
 		# create pcap
 		filename = str(time.time()) + '.pcap'
-		cmd = "sudo tcpdump -c 10 -w " + path +"/package_file/" + filename
+		cmd = "sudo tcpdump -i enp3s0 -c 10 -w " + path +"/package_file/" + filename
 		os.system(cmd)
 
 		#delete pcap for 1 hr past file
@@ -28,7 +28,7 @@ def main():
 		for x in filenames:
 			temp = x[:-5]
 			if float(temp) + 3600 < time.time():
-				os.remove(path + "/package_file/" + x)
+				os.remove(path + "/package_file.bak/" + x)
 
 
 if __name__ == '__main__':
