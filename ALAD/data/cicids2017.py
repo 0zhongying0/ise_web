@@ -20,7 +20,7 @@ def get_valid(label=0, scale=False, *args):
 
 def get_shape_input():
     """Get shape of the dataset for cicids2017"""
-    return (None, 78)
+    return (None, 77)
 
 def get_shape_label():
     """Get shape of the labels in cicids2017"""
@@ -48,8 +48,8 @@ def _get_dataset(scale):
     df = pd.read_csv("data/all.csv")
     #text_l = ['protocol_type', 'service', 'flag', 'land', 'logged_in', 'is_host_login', 'is_guest_login']
     df.drop('Index', axis=1, inplace=True)
+    df.drop(' Fwd Header Length.1', axis=1, inplace=True)
     text_l = []
-    print(df)
     for name in text_l:
         _encode_text_dummy(df, name)
 
@@ -75,7 +75,6 @@ def _get_dataset(scale):
     y_train = y_train[y_train != 1]
     x_valid = x_valid[y_valid != 1]
     y_valid = y_valid[y_valid != 1]
-
     if scale:
         print("Scaling cicids2017 dataset")
         scaler = MinMaxScaler()
@@ -83,7 +82,6 @@ def _get_dataset(scale):
         x_train = scaler.transform(x_train)
         x_valid = scaler.transform(x_valid)
         x_test = scaler.transform(x_test)
-
     dataset = {}
     dataset['x_train'] = x_train.astype(np.float32)
     dataset['y_train'] = y_train.astype(np.float32)

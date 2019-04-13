@@ -52,36 +52,35 @@ def save_results(scores, data, model, dataset, method, weight, label,
 
     
     scores = np.array(scores) 
-
     per = 0
     if method == 'ch':
-        per = 82.56
+        per = 1371.97
     if method == 'l1':
-        per = 1640473.35
+        per = 141552.62
     if method == 'l2':
-        per = 333031.30
+        per = 55937.08
     if method == 'fm':
-        per = 911092.77
-    y_pred = (scores>=per)
-    
+        per = 259585.21
+    y_pred = (scores<=per)
 
     #results = [model, dataset, method, weight, label,
       #         step, roc_auc, precision, recall, f1, random_seed, time.ctime()]
-    save_results_csv("results/results.csv", data, y_pred)
+    if method == 'fm':
+        save_results_csv("results/results.csv", data, y_pred)
     
     #results = [step, roc_auc, precision, recall, f1, random_seed]
     #save_results_csv(fname, results)
 
 
 
-def save_results_csv(fname, data, y):
+def save_results_csv(fname, data, y_pred):
     """Saves results in csv file
     Args:
         fname (str): name of the file
         results (list): list of prec, rec, F1, rds
     """
 
-    new_rows = []
+    
     if not os.path.isfile(fname):
         args = fname.split('/')[:-1]
         directory = os.path.join(*args)
@@ -99,15 +98,15 @@ def save_results_csv(fname, data, y):
         'Fwd Blk Rate Avg', 'Bwd Byts/b Avg', 'Bwd Pkts/b Avg', 'Bwd Blk Rate Avg', 'Subflow Fwd Pkts', 'Subflow Fwd Byts', 'Subflow Bwd Pkts', 'Subflow Bwd Byts', 'Init Fwd Win Byts', 'Init Bwd Win Byts', 
         'Fwd Act Data Pkts', 'Fwd Seg Size Min', 'Active Mean', 'Active Std', 'Active Max', 'Active Min', 'Idle Mean', 'Idle Std', 'Idle Max', 'Idle Min', 'Label']])
 
-
+    new_rows = []
     with open(fname, 'at') as f:
         # Overwrite the old file with the modified rows
-        writer = csv.writer(f)
-        for x in range(len(data[0])):
-            for y in range(len(data)):
-                new_rows.append(data[y][x])
-            new_rows.append(0 if y == False else 1)
-            writer.writerows(new_rows)
+        for x in range(len(data)):
+            writer = csv.writer(f)
+            for y in range(len(data[0])):
+                new_rows.append(data[x][y])
+            new_rows.append(0 if y_pred[x] == False else 1)
+            writer.writerow(new_rows)
             new_rows = []
         
         

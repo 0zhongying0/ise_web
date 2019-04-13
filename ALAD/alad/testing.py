@@ -96,6 +96,7 @@ def test(dataset, nb_epochs, degree, random_seed, label,
     for x in element:
         result.remove(x)
     testx = df.as_matrix(result).astype(np.float32)
+
     rng = np.random.RandomState(random_seed)
     nr_batches_test = int(testx.shape[0] / batch_size)
 
@@ -347,7 +348,7 @@ def test(dataset, nb_epochs, degree, random_seed, label,
             sum_op_im = tf.summary.merge_all('image')
             sum_op_valid = tf.summary.merge_all('v')
 
-    logdir = "train_logs/cicids2017/alad_snFalse_dzzFalse/dzzenabledFalse/fm/label0/rd43"
+    logdir = "ALAD/train_logs/cicids2017/alad_snTrue_dzzTrue/dzzenabledTrue/fm/label0/rd43"
     saver = tf.train.Saver(max_to_keep=1)
     save_model_secs = None if enable_early_stop else 20
     sv = tf.train.Supervisor(logdir=logdir, save_summaries_secs=None, saver=saver, save_model_secs=save_model_secs) 
