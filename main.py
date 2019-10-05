@@ -43,8 +43,8 @@ def main():
 	cmd = "sudo rm -rf ./package_file_temp/*"
 	os.system(cmd)
 
-	os.chdir('ALAD')
-	os.system('python3 main.py alad cicids2017 testing')
+	#os.chdir('ALAD')
+	#os.system('python3 main.py alad cicids2017 testing')
 
 
 if __name__ == '__main__':
